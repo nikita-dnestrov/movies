@@ -1,2 +1,2 @@
-export { User } from "./User";
-export { Movie } from "./Movie";
+export { User } from "./User.js";
+export { Movie } from "./Movie.js";

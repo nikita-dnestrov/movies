@@ -1,5 +1,5 @@
-import { filterHelper } from '../helper/filter.helper';
-import { Movie } from '../models';
+import { filterHelper } from "../helper/filter.helper.js";
+import { Movie } from "../models/index.js";
 
 class MovieService {
   async findById(id) {
@@ -12,7 +12,7 @@ class MovieService {
     return (await Movie.findAll({ where: composedFilter, order: [sort], raw: true })).map(
       (movie) => ({
         ...movie,
-        actors: JSON.parse(movie.actors),
+        actors: JSON.parse(movie.actors)
       })
     );
   }

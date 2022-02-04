@@ -1,7 +1,7 @@
-import * as bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { userService } from '../services';
-import { config } from '../config';
+import * as bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import { userService } from "../services/index.js";
+import { config } from "../config/index.js";
 
 class UserController {
   async signup(req, res, next) {
@@ -25,7 +25,7 @@ class UserController {
         if (result) {
           res.status(200).json({ token: jwt.sign(data, config.SECRET), status: 1 });
         } else {
-          throw new Error('Wrong password');
+          throw new Error("Wrong password");
         }
       });
     } catch (e) {
