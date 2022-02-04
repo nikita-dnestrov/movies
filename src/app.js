@@ -5,7 +5,7 @@ import AppRouter from "./router/index.js";
 
 export const app = express();
 
-sequelize.sync({ force: true }).then(() => console.log("db connected"));
+sequelize.sync().then(() => console.log("db connected"));
 
 app.use(bodyParser.json());
 
