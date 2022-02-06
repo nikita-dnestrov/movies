@@ -1,19 +1,19 @@
-import jwt from "jsonwebtoken";
-import { config } from "../config/index.js";
+import jwt from 'jsonwebtoken';
+import { config } from '../config/index.js';
 
 export const authHandler = async (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
-    throw new Error("Unauthorized");
+    res.status(401).json({ message: 'Authorization token is required' });
   }
 
-  const [bearer, token] = authorization.split(" ");
+  const [bearer, token] = authorization.split(' ');
 
   try {
     const user = jwt.verify(token, config.SECRET);
 
-    if (!user) {
-      throw new Error("Unauthorized");
+    if (!authorization) {
+      res.status(401).json({ message: 'Authorization token is not valid' });
     }
     req.user = user;
     next();

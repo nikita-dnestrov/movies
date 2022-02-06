@@ -1,7 +1,7 @@
-import * as bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { userService } from "../services/index.js";
-import { config } from "../config/index.js";
+import * as bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { userService } from '../services/index.js';
+import { config } from '../config/index.js';
 
 class UserController {
   async signup(req, res, next) {
@@ -11,7 +11,9 @@ class UserController {
       const user = await userService.create({ ...req.body, password: hash });
       res.status(200).json({ user });
     } catch (e) {
-      res.status(500).json({ message: e.message });
+      if (e.name === 'SequelizeUniqueConstraintError') {
+        res.status(422).json({ message: e.errors[0].message });
+      } else next(e);
     }
   }
 
@@ -25,7 +27,7 @@ class UserController {
         if (result) {
           res.status(200).json({ token: jwt.sign(data, config.SECRET), status: 1 });
         } else {
-          throw new Error("Wrong password");
+          throw new Error('Wrong password');
         }
       });
     } catch (e) {

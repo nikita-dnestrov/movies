@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../db.js';
 
 export class Movie extends Model {}
 
@@ -7,24 +7,25 @@ Movie.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
     },
     title: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      unique: true,
     },
     year: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     format: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     actors: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
-    modelName: "movie",
-    timestamps: true
+    modelName: 'movie',
+    timestamps: true,
   }
 );

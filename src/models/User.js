@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import { sequelize } from "../db.js";
+import { Model, DataTypes } from 'sequelize';
+import { sequelize } from '../db.js';
 
 export class User extends Model {}
 
@@ -7,21 +7,23 @@ User.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true
+      primaryKey: true,
     },
     email: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     password: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     name: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize,
-    modelName: "user",
-    timestamps: true
+    modelName: 'user',
+    timestamps: true,
   }
 );
